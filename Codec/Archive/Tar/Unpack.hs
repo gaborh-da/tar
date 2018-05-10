@@ -109,8 +109,8 @@ unpack baseDir entries = unpackEntries [] (checkSecurity entries)
 
     emulateLinks = mapM_ $ \(relPath, relLinkTarget) ->
       let absPath   = baseDir </> relPath
-          absTarget = FilePath.Native.takeDirectory absPath </> relLinkTarget
-       in copyFile absTarget absPath
+          absTarget = baseDir </> relLinkTarget
+      in copyFile absTarget absPath
 
 setModTime :: FilePath -> EpochTime -> IO ()
 #if MIN_VERSION_directory(1,2,3)
